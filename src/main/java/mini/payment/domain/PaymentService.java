@@ -5,12 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import mini.payment.dto.PaymentDTO;
 import mini.payment.dto.PaymentRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Slf4j
 @Service
