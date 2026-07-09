@@ -1,5 +1,6 @@
 package mini.payment;
 
+import jakarta.validation.Valid;
 import mini.payment.domain.PaymentService;
 import mini.payment.dto.PaymentDTO;
 import mini.payment.dto.PaymentRequest;
@@ -13,17 +14,17 @@ public class PaymentController {
     public PaymentController(PaymentService paymentService){ this.paymentService = paymentService;}
 
     @PostMapping
-    public PaymentDTO create(@RequestBody PaymentRequest request){
+    public PaymentDTO create(@Valid @RequestBody PaymentRequest request){
         return paymentService.createPayment(request);
     }
 
-    @GetMapping({"/{id}"})
-    public PaymentDTO get(@PathVariable Long id){
+    @GetMapping( {"/{id}"})
+    public PaymentDTO get(@Valid @PathVariable Long id){
         return paymentService.getPayment(id);
     }
 
     @PostMapping("/{id}/confirm")
-    public PaymentDTO confirm(@PathVariable Long id){
+    public PaymentDTO confirm(@Valid @PathVariable Long id){
         return paymentService.confirmPayment(id);
     }
 

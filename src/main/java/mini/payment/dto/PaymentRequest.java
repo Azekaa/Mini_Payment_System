@@ -1,11 +1,14 @@
 package mini.payment.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 
 public record PaymentRequest(
-        Long userId,
-        BigDecimal amount
+       @NotNull Long userId,
+       @NotNull @Positive BigDecimal amount
 ) {
 
 }
