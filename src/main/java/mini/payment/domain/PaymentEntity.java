@@ -41,8 +41,13 @@ public class PaymentEntity {
     public PaymentEntity(){
 
     }
-
-
-    public PaymentEntity(Long aLong, BigDecimal amount, PaymentStatus paymentStatus) {
+    public PaymentEntity(
+            Long userId,
+            BigDecimal amount,
+            PaymentStatus status
+    ) {
+        this.userId = userId;
+        this.amount = amount;
+        this.status = status;
     }
 }
