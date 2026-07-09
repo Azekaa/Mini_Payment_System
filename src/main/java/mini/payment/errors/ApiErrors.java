@@ -1,4 +1,13 @@
 package mini.payment.errors;
 
-public class ApiErrors {
+import java.time.LocalDateTime;
+
+public record ApiErrors(
+        LocalDateTime timestamp,
+        int status,
+        String error,
+        String message,
+        String path
+) {
+
 }
