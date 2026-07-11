@@ -2,6 +2,8 @@ package mini.payment.domain;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import mini.payment.domain.db.PaymentEntity;
+import mini.payment.domain.db.PaymentRepository;
 import mini.payment.dto.PaymentDTO;
 import mini.payment.dto.PaymentRequest;
 import org.springframework.http.HttpStatus;

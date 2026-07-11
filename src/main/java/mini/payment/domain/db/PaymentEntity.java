@@ -1,9 +1,10 @@
-package mini.payment.domain;
+package mini.payment.domain.db;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import mini.payment.domain.PaymentStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 

@@ -1,4 +1,4 @@
-package mini.payment;
+package mini.payment.Controller;
 
 import jakarta.validation.Valid;
 import mini.payment.domain.PaymentService;
