@@ -31,7 +31,7 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public List<UserDto> getAllUsers(){
-        return userRepository.findAll().stream().map(this::toResponse).toList();
+        return userRepository.findAllWithUser().stream().map(this::toResponse).toList();
     }
 
     @Transactional(readOnly = true)
@@ -44,7 +44,7 @@ public class UserService {
         return new UserDto(
                 user.getId(),
                 user.getEmail(),
-                mapper.mapListToDto(user.getPayment())
+                mapper.mapListToDto(user.getPayments())
         );
     }
 
