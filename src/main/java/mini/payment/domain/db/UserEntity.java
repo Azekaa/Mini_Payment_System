@@ -23,7 +23,7 @@ public class UserEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private List<PaymentEntity> payment = new ArrayList<>();
+    private List<PaymentEntity> payments = new ArrayList<>();
 
     public UserEntity(){
     }

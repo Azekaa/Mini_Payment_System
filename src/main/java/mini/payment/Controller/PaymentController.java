@@ -28,4 +28,6 @@ public class PaymentController {
         return paymentService.confirmPayment(id);
     }
 
+    @PostMapping("/{id}/reject")
+    public PaymentDTO reject(@Valid @PathVariable Long id) {return paymentService.rejectPayment(id);}
 }

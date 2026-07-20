@@ -19,9 +19,11 @@ public class PaymentService {
     private static final BigDecimal MAX_AMOUNT = new BigDecimal("10000.00");
 
     private final PaymentRepository paymentRepository;
+    private final PaymentEntityMapper mapper;
 
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, PaymentEntityMapper mapper) {
         this.paymentRepository = paymentRepository;
+        this.mapper = mapper;
     }
 
     @Transactional
@@ -32,12 +34,12 @@ public class PaymentService {
         }
         PaymentEntity saved = paymentRepository.save(payment);
         log.info("Payment created id={}", saved.getId());
-        return convertEntityToDto(saved);
+        return mapper.convertEntityToDto(saved);
     }
 
     public PaymentDTO getPayment(Long id) {
         PaymentEntity payment = findPaymentOrThrow(id);
-        return convertEntityToDto(payment);
+        return mapper.convertEntityToDto(payment);
     }
 
     @Transactional
@@ -49,24 +51,23 @@ public class PaymentService {
         payment.setStatus(PaymentStatus.SUCCEEDED);
         PaymentEntity saved = paymentRepository.save(payment);
         log.info("Payment has been confirmed: id={}",id);
-        return convertEntityToDto(saved);
+        return mapper.convertEntityToDto(saved);
+    }
+
+    @Transactional
+    public PaymentDTO rejectPayment(Long id) throws RuntimeException{
+        PaymentEntity payment = findPaymentOrThrow(id);
+        if(payment.getStatus() != PaymentStatus.NEW){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Payment status must be NEW");
+        }
+        payment.setStatus(PaymentStatus.FAILED);
+        PaymentEntity saved = paymentRepository.save(payment);
+        log.info("change the status to FAILED: id={}",id);
+        return mapper.convertEntityToDto(saved);
     }
 
     private PaymentEntity findPaymentOrThrow(Long id){
         return paymentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Payment with id=" + id + "not found"));
     }
-
-    private PaymentDTO convertEntityToDto(PaymentEntity payment){
-        return new PaymentDTO(
-                payment.getId(),
-                payment.getUserId(),
-                payment.getAmount(),
-                payment.getStatus(),
-                payment.getCreatedAt(),
-                payment.getUpdateAt()
-        );
-    }
-
-
 }
