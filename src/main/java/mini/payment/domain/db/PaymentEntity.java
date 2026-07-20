@@ -36,7 +36,7 @@ public class PaymentEntity {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "update_at", nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updateAt;
 
     public PaymentEntity(){
