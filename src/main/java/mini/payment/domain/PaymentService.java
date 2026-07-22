@@ -7,7 +7,6 @@ import mini.payment.domain.db.PaymentRepository;
 import mini.payment.domain.db.UserRepository;
 import mini.payment.dto.PaymentDTO;
 import mini.payment.dto.PaymentRequest;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -75,6 +74,7 @@ public class PaymentService {
         log.info("Payment has been confirmed: id={}",id);
         redisTemplate.delete(id.toString());
         return mapper.convertEntityToDto(saved);
+
     }
 
     @Transactional
